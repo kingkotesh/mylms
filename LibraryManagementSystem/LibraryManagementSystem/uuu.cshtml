@@ -1,0 +1,40 @@
+﻿@using WebMatrix.Data
+@{
+    Database db = Database.Open("lmsdb");
+    var q = "select * from uu";
+    db.Query(q);
+    var status = "";
+    if (IsPost)
+    {
+        status =Request["res"];
+
+    }
+}
+<form action="" method="post">
+    <select id="res" name="res">
+        <option>select</option>
+        <option value="true">yes</option>
+        <option value="false">no</option>
+    </select>
+    <input type="submit" name="eb" value="reserve" />
+</form>
+
+<h1>
+    @if (status == "true")
+    {
+        var uquery = "update uu set res='reserved' where id=@3";
+        db.Execute(uquery);
+
+
+
+        //var r = "reserved";
+        //var up = "update uu set res="+status+" where id=1";
+        //db.Execute(up);
+        <p>Status: reserved</p>
+    }
+    else
+    {
+        <p>Status: Checked Out</p>
+    }
+
+</h1>

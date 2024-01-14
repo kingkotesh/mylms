@@ -1,0 +1,12 @@
+﻿@using WebMatrix.Data;
+@{ 
+    Database db = Database.Open("lmsdb");
+    var q = "select title from reservation where username=@0"; 
+    var r = db.Query(q, Request.Cookies["cook"].Value);
+    WebGrid w = new WebGrid(r);
+}
+
+<h1>My Books are:</h1>
+@w.GetHtml(
+    columns:w.Columns(w.Column("title"))
+    )

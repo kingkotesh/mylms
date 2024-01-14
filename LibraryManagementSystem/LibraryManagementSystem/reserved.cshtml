@@ -1,0 +1,17 @@
+﻿@using WebMatrix.Data;
+@{
+    Database db = Database.Open("lmsdb");
+    /*  var kk = Request.Cookies["category"].Value;
+     var q = "select * from " + kk;
+     var v = db.Query(q);
+     WebGrid w = new WebGrid(v);
+    */
+    var qq = "select * from reservation";
+    var vv = db.Query(qq);
+    WebGrid ww = new WebGrid(vv);
+}
+
+@ww.GetHtml(
+        columns: ww.Columns(ww.Column("id"), ww.Column("username"), ww.Column("title"))
+
+    )

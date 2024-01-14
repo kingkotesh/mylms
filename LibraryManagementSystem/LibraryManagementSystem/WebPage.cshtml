@@ -1,0 +1,64 @@
+﻿@using WebMatrix.Data;
+@{
+    string t = "leakhasri";
+    Database db = Database.Open("lmsdb");
+    //var rk = "select username from reservation where title=";
+    //var result = db.QuerySingle(rk);
+
+    //Response.Cookies["cook"].Value = "mymother";
+    //var u2 = "SELECT username FROM reservation WHERE username = @0";
+    //var u3 = db.QuerySingle(u2, Request.Cookies["cook"].Value);
+
+
+    var u2 = "SELECT username FROM UserDetails WHERE username = @0";
+    //var u3 = db.QuerySingle(u2, Request.Cookies["cook"].Value);
+    var u3 = db.QuerySingle(u2, t);
+    if (u3 == null)
+    {
+        u2 = "SELECT username FROM AdminDetails WHERE username = @0";
+        //var u3 = db.QuerySingle(u2, Request.Cookies["cook"].Value);
+        u3 = db.QuerySingle(u2, t);
+        <h1>admindetails</h1>
+    }
+
+    else
+    {
+        <h1>user user</h1>
+
+    }
+    /*if (u3 != null)
+    {
+        RenderPage("~/usermenu.cshtml");
+    }
+    else
+    {
+        RenderPage("~/adminmenu.cshtml");
+
+    }*/
+
+
+    //var u2 = "select username from reservation where username=" + Request.Cookies["cook"].Value;
+    //var u3 = db.QuerySingle(u2);
+
+    /*<form method="post" action="">
+        <input type="submit" value="click" />
+    </form>
+    */
+
+
+
+
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Extract Value</title>
+</head>
+<body>
+
+    <h2>Status Value: </h2>
+    @u3.username
+</body>
+</html>
